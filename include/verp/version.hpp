@@ -6,8 +6,8 @@ namespace verp {
     class version {
         friend struct fmt::formatter<verp::version>;
 
-        core core;
-        git git;
+        verp::core core;
+        verp::git git;
     public:
         constexpr version() = default;
 
