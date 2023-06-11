@@ -14,7 +14,7 @@ test.libs := fmt gtest gtest_main
 
 install.directories = $(include)/$(project)
 
-files = $(include) $(src) Makefile version
+files = $(include) $(src) Makefile VERSION
 
 include mkbuild/base.mk
 
