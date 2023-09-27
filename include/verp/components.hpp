@@ -75,7 +75,7 @@ namespace fmt {
             verp::core core,
             FormatContext& ctx
         ) const {
-            return format_to(
+            return fmt::format_to(
                 ctx.out(),
                 "{}.{}.{}",
                 core.major,
@@ -97,7 +97,7 @@ namespace fmt {
             const verp::git& git,
             FormatContext& ctx
         ) const {
-            return format_to(
+            return fmt::format_to(
                 ctx.out(),
                 "-{}-g{}",
                 git.commits_ahead,

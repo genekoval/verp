@@ -74,10 +74,10 @@ namespace fmt {
             const verp::version& version,
             FormatContext& ctx
         ) const {
-            auto it = format_to(ctx.out(), "{}", version.core);
+            auto it = fmt::format_to(ctx.out(), "{}", version.core);
 
             if (version.git.commits_ahead > 0) {
-                it = format_to(ctx.out(), "{}", version.git);
+                it = fmt::format_to(ctx.out(), "{}", version.git);
             }
 
             return it;
