@@ -12,7 +12,7 @@ namespace verp {
         constexpr version() = default;
 
         explicit constexpr version(std::string_view version_string) {
-            auto parser = detail::parser{version_string};
+            auto parser = detail::parser {version_string};
 
             parser.parse(core);
             parser.parse(git);
@@ -20,9 +20,8 @@ namespace verp {
             parser.expect_eof();
         }
 
-        constexpr auto operator<=>(
-            const version& other
-        ) const noexcept -> std::weak_ordering {
+        constexpr auto operator<=>(const version& other) const noexcept
+            -> std::weak_ordering {
             const auto ordering = core <=> other.core;
             if (ordering != 0) return ordering;
 
@@ -55,6 +54,7 @@ namespace verp {
         constexpr auto minor() const noexcept -> std::uint32_t {
             return core.minor;
         }
+
         constexpr auto patch() const noexcept -> std::uint32_t {
             return core.patch;
         }
@@ -70,10 +70,8 @@ namespace fmt {
         }
 
         template <typename FormatContext>
-        constexpr auto format(
-            const verp::version& version,
-            FormatContext& ctx
-        ) const {
+        constexpr auto format(const verp::version& version, FormatContext& ctx)
+            const {
             auto it = fmt::format_to(ctx.out(), "{}", version.core);
 
             if (version.git.commits_ahead > 0) {

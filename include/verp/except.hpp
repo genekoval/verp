@@ -15,8 +15,7 @@ namespace verp {
             std::invalid_argument(token.lexeme.data()),
             source(source),
             pos(token.position),
-            len(1)
-        {}
+            len(1) {}
 
         invalid_version(
             std::string_view source,
@@ -26,8 +25,7 @@ namespace verp {
             std::invalid_argument(what_arg),
             source(source),
             pos(token.position),
-            len(std::max(token.lexeme.size(), 1ul))
-        {}
+            len(std::max(token.lexeme.size(), 1ul)) {}
 
         auto print() const noexcept -> void {
             using namespace fmt::literals;
@@ -47,13 +45,9 @@ namespace verp {
             fmt::print(stderr, "\n");
         }
 
-        auto length() const noexcept -> int {
-            return len;
-        }
+        auto length() const noexcept -> int { return len; }
 
-        auto position() const noexcept -> int {
-            return pos;
-        }
+        auto position() const noexcept -> int { return pos; }
 
         auto source_string() const noexcept -> std::string_view {
             return source;

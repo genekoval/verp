@@ -3,20 +3,15 @@
 #include <fmt/format.h>
 
 namespace verp {
-    enum class level : std::uint8_t {
-        major,
-        minor,
-        patch
-    };
+    enum class level : std::uint8_t { major, minor, patch };
 
     struct core {
         std::uint32_t major = 0;
         std::uint32_t minor = 0;
         std::uint32_t patch = 0;
 
-        constexpr auto operator<=>(
-            const core other
-        ) const noexcept -> std::weak_ordering {
+        constexpr auto operator<=>(const core other) const noexcept
+            -> std::weak_ordering {
             if (major != other.major) return major <=> other.major;
             if (minor != other.minor) return minor <=> other.minor;
 
@@ -38,8 +33,7 @@ namespace verp {
                     ++minor;
                     patch = 0;
                     break;
-                case level::patch:
-                    ++patch;
+                case level::patch: ++patch; break;
             }
 
             return *this;
@@ -50,9 +44,8 @@ namespace verp {
         std::uint32_t commits_ahead = 0;
         std::string commit;
 
-        constexpr auto operator<=>(
-            const git& other
-        ) const noexcept -> std::weak_ordering {
+        constexpr auto operator<=>(const git& other) const noexcept
+            -> std::weak_ordering {
             return commits_ahead <=> other.commits_ahead;
         }
 
@@ -71,10 +64,7 @@ namespace fmt {
         }
 
         template <typename FormatContext>
-        constexpr auto format(
-            verp::core core,
-            FormatContext& ctx
-        ) const {
+        constexpr auto format(verp::core core, FormatContext& ctx) const {
             return fmt::format_to(
                 ctx.out(),
                 "{}.{}.{}",
@@ -93,10 +83,7 @@ namespace fmt {
         }
 
         template <typename FormatContext>
-        constexpr auto format(
-            const verp::git& git,
-            FormatContext& ctx
-        ) const {
+        constexpr auto format(const verp::git& git, FormatContext& ctx) const {
             return fmt::format_to(
                 ctx.out(),
                 "-{}-g{}",

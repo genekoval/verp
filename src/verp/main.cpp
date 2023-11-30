@@ -56,12 +56,8 @@ auto main(int argc, char** argv) -> int {
         NAME,
         VERSION,
         "Validates and prints the given versions sorted by version precedence",
-        options(
-            flag({"r", "reverse"}, "Print versions in descending order")
-        ),
-        arguments(
-            variadic<verp::version>("versions")
-        ),
+        options(flag({"r", "reverse"}, "Print versions in descending order")),
+        arguments(variadic<verp::version>("versions")),
         internal::main
     );
 

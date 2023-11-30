@@ -9,9 +9,8 @@ namespace commline {
         throw cli_error("invalid version level `{}`", argument);
     }
 
-    auto parser<verp::version>::parse(
-        std::string_view argument
-    ) -> verp::version {
-        return verp::version{argument};
+    auto parser<verp::version>::parse(std::string_view argument)
+        -> verp::version {
+        return verp::version {argument};
     }
 }

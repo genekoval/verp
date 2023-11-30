@@ -3,14 +3,7 @@
 #include <string_view>
 
 namespace verp::detail {
-    enum class token_type {
-        numeric,
-        alphanumeric,
-        dot,
-        hyphen,
-        eof,
-        error
-    };
+    enum class token_type { numeric, alphanumeric, dot, hyphen, eof, error };
 
     struct token {
         token_type type;
@@ -20,10 +13,8 @@ namespace verp::detail {
 
     class scanner {
         static constexpr auto is_alphanumeric(char c) noexcept -> bool {
-            return
-                is_digit(c) ||
-                (c >= 'a' && c <= 'z') ||
-                (c >= 'A' && c <= 'Z');
+            return is_digit(c) || (c >= 'a' && c <= 'z') ||
+                   (c >= 'A' && c <= 'Z');
         }
 
         static constexpr auto is_digit(char c) noexcept -> bool {
@@ -34,9 +25,7 @@ namespace verp::detail {
         const char* start;
         const char* current;
 
-        constexpr auto advance() noexcept -> char {
-            return *current++;
-        }
+        constexpr auto advance() noexcept -> char { return *current++; }
 
         constexpr auto alphanumeric() noexcept -> token {
             while (is_alphanumeric(peek())) advance();
@@ -47,8 +36,7 @@ namespace verp::detail {
             return token {
                 .type = token_type::error,
                 .lexeme = message,
-                .position = position()
-            };
+                .position = position()};
         }
 
         constexpr auto is_at_end() const noexcept -> bool {
@@ -63,24 +51,22 @@ namespace verp::detail {
             return token {
                 .type = type,
                 .lexeme = std::string_view(start, current),
-                .position = position()
-            };
+                .position = position()};
         }
 
         constexpr auto numeric() noexcept -> token {
             while (is_digit(peek())) advance();
             if (is_alphanumeric(peek())) return alphanumeric();
 
-            if (length() > 1 && *start == '0') return error_token(
-                "numeric identifiers must not contain leading zeroes"
-            );
+            if (length() > 1 && *start == '0')
+                return error_token(
+                    "numeric identifiers must not contain leading zeroes"
+                );
 
             return make_token(token_type::numeric);
         }
 
-        constexpr auto peek() const noexcept -> char {
-            return *current;
-        }
+        constexpr auto peek() const noexcept -> char { return *current; }
 
         constexpr auto position() const noexcept -> std::size_t {
             return start - source.begin();
@@ -89,8 +75,7 @@ namespace verp::detail {
         explicit constexpr scanner(std::string_view source) :
             source(source),
             start(source.begin()),
-            current(start)
-        {
+            current(start) {
             if (*start == 'v') advance();
         }
 
