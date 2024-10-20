@@ -1,3 +1,4 @@
+#include "main.hpp"
 #include "opts.hpp"
 
 #include <algorithm>
@@ -53,8 +54,8 @@ auto main(int argc, char** argv) -> int {
     std::locale::global(std::locale(""));
 
     auto app = application(
-        NAME,
-        VERSION,
+        PROJECT_NAME,
+        GIT_VERSION_FULL,
         "Validates and prints the given versions sorted by version precedence",
         options(flag({"r", "reverse"}, "Print versions in descending order")),
         arguments(variadic<verp::version>("versions")),

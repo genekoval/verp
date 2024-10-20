@@ -1,0 +1,4 @@
+#pragma once
+
+#cmakedefine PROJECT_NAME "@PROJECT_NAME@"
+#cmakedefine GIT_VERSION_FULL "@GIT_VERSION_FULL@"
